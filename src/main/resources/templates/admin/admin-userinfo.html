@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유저 정보</title>
+    <style>
+
+        nav {
+            height: 100vh; /* 화면 높이 전체 */
+            width: 200px; /* 네비게이션 바 폭 */
+            position: fixed; /* 화면 위치 고정 */
+            top: 0;
+            left: 0;
+            background-color: #333; /* 배경색 */
+            padding-top: 20px; /* 상단 여백 */
+            color: white; /* 글자색 */
+        }
+
+        nav a {
+            display: block;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s ease; /* 배경색 전환 애니메이션 */
+        }
+
+        nav a:hover {
+            background-color: #555; /* 호버시 배경색 */
+        }
+
+        /* 페이지 내용 스타일 */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .user-info {
+            margin-top: 20px;
+        }
+
+        .user-info div {
+            margin-bottom: 10px;
+        }
+
+        .user-info label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        select {
+            padding: 5px;
+            border-radius: 3px;
+        }
+
+        button {
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 네비게이션 바 -->
+<nav class="side-ui">
+    <a href="admin-user.html">사용자 관리</a>
+    <a href="admin-board.html">게시판 관리</a>
+    <a href="admin-stats.html">이용자 통계</a>
+    <a href="admin-style.html">헤어스타일 관리</a>
+</nav>
+
+<!-- 페이지 내용 -->
+<div style="margin-left: 200px;"> <!-- 네비게이션 바 폭 만큼 왼쪽 여백 설정 -->
+    <h1>유저 정보 열람</h1>
+
+    <div class="user-info">
+        <div>
+            <label for="userId">ID:</label>
+            <span id="userId">user123</span>
+        </div>
+        <div>
+            <label for="userName">이름:</label>
+            <span id="userName">홍길동</span>
+        </div>
+        <div>
+            <label for="gender">성별:</label>
+            <span id="gender">남</span>
+        </div>
+        <div>
+            <label for="userEmail">이메일:</label>
+            <span id="userEmail">user123@example.com</span>
+        </div>
+        <div>
+            <label for="userIdentifier">식별ID:</label>
+            <span id="userIdentifier">100123</span>
+        </div>
+        <div>
+            <label for="userJoinDate">가입일시:</label>
+            <span id="userJoinDate">24-03-02</span>
+        </div>
+        <div>
+            <label for="auth-article">게시글 작성 권한:</label>
+            <select id="auth-article">
+                <option value="blocked">차단됨</option>
+                <option value="unblocked">차단해제됨</option>
+            </select>
+            <button onclick="updateUserStatus()">저장</button>
+        </div>
+        <div>
+            <label for="auth-reply">댓글 작성 권한:</label>
+            <select id="auth-reply">
+                <option value="blocked">차단됨</option>
+                <option value="unblocked">차단해제됨</option>
+            </select>
+            <button onclick="updateUserStatus()">저장</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 사용자 차단/차단해제 상태 업데이트 함수
+    function updateUserStatus() {
+        var userStatus = document.getElementById("userStatus").value;
+        var statusText = userStatus === "blocked" ? "차단됨" : "차단해제됨";
+        alert("사용자 상태가 '" + statusText + "'으로 변경되었습니다.");
+    }
+</script>
+
+</body>
+</html>

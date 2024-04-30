@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <style>
+        /* 네비게이션 바 스타일 */
+        nav {
+            background-color: #FF8787; /* 배경색 */
+            overflow: hidden;
+        }
+
+        nav a {
+            float: left; /* 왼쪽 정렬 */
+            display: block;
+            color: white; /* 글자색 */
+            text-align: center;
+            padding: 14px 20px; /* 위아래 왼오 여백 */
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #ddd; /* 호버시 배경색 */
+            color: black; /* 호버시 글자색 */
+        }
+
+        nav a.home {
+            font-weight: bold;
+        }
+
+        nav a.login {
+            float: right; /* 오른쪽 정렬 */
+            display: block;
+            color: white; /* 글자색 */
+            padding: 14px 20px;
+            text-align: right;
+        }
+
+        /* 회원가입 폼 스타일 */
+        .signup-form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        input[type="name"],
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: calc(100% - 100px); /* 버튼 공간만큼 입력칸 너비 조정 */
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            box-sizing: border-box;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        button {
+            background-color: #FF8787;
+            color: white;
+            padding: 10px; /* 입력 칸과 동일한 상하 여백 */
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            width: auto; /* 버튼 너비 지정 */
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        button:hover {
+            background-color: #FF6666;
+        }
+
+        body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.container-term {
+    margin-top: 20px;
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+textarea {
+    width: 95%; 
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: none; /* 사용자가 크기 조정할 수 없도록 설정 */
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.checkbox-container input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+}
+
+button {
+    background-color: #FF8787;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #FF6666;
+}
+    </style>
+</head>
+<body>
+
+<!-- 네비게이션 바 -->
+<div th:replace="user/nav_user.html"></div>
+
+<div class="content">
+    <h2>이용약관</h2>
+    <div class="container-term">
+        <textarea name="" id="" cols="30" rows="10" disabled="disabled">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id maxime assumenda eligendi eveniet perspiciatis laborum error dolorem, laudantium, officiis, quidem exercitationem doloribus aliquam. Commodi, qui deleniti. Quas deserunt fugit odio.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci quae recusandae sit inventore nihil dolor vero dolorem magni harum ab laudantium nesciunt totam consequatur sed veritatis labore, laboriosam, explicabo quasi?
+        </textarea>
+        <div class="checkbox-container">
+            <input type="checkbox" style="float: left;">
+            <p>약관에 동의합니다.</p>
+        </div>
+        <button><a href="/join">회원가입</a> </button>
+    </div>
+</div>
+
+<script>
+    function checkDuplicate() {
+        // 중복확인 기능을 구현할 수 있는 JavaScript 코드 작성
+        // 여기서는 간단하게 alert 창을 띄워서 구현 예정
+        alert('사용할 수 있는 ID입니다.');
+    }
+
+    function sendVerificationEmail() {
+        var email = document.getElementById('email').value;
+        // 여기서 이메일을 서버로 전송하여 인증 메일을 발송하는 로직을 구현
+        alert('인증 메일을 ' + email + ' 주소로 전송했습니다.');
+    }
+</script>
+
+</body>
+</html>

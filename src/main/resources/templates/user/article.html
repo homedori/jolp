@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 열람</title>
+    <style>
+        /* 네비게이션 바 스타일 */
+        nav {
+            background-color: #FF8787; /* 배경색 */
+            overflow: hidden;
+        }
+
+        nav a {
+            float: left; /* 왼쪽 정렬 */
+            display: block;
+            color: white; /* 글자색 */
+            text-align: center;
+            padding: 14px 20px; /* 위아래 왼오 여백 */
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #ddd; /* 호버시 배경색 */
+            color: black; /* 호버시 글자색 */
+        }
+
+        nav a.home {
+            font-weight: bold;
+            
+        }
+
+        nav a.login {
+            float: right; /* 오른쪽 정렬 */
+            display: block;
+            color: white; /* 글자색 */
+            padding: 14px 20px;
+            text-align: right;
+        }
+
+        /* 게시글 내용 스타일 */
+        .content {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .post-info {
+            margin-bottom: 10px;
+            font-style: italic;
+            display: flex;
+            justify-content: space-between; /* 요소 간 간격을 최대한 벌리기 */
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        /* 게시글 목록 스타일 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #FF8787;
+            color: white;
+            font-weight: normal;
+        }
+
+        .post a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .post a:hover {
+            text-decoration: underline;
+        }
+
+        .pagination {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .pagination a {
+            display: inline-block;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #007bff;
+            border: 1px solid #ddd;
+            margin-right: 5px;
+        }
+
+        .pagination a.active {
+            background-color: #FF8787;
+            color: white;
+            border: 1px solid #FF8787;
+        }
+
+        .reply-form-container {
+            margin-top: 20px;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+
+        .reply-form-container .replyer-title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+            margin-right: 30px;
+        }
+
+        .reply-form-container .replyer-username {
+            font-style: italic;
+            margin-right: 10px;
+        }
+
+        .reply-form-container .reply-form {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .reply-form-container .reply-text {
+            flex: 1;
+            height: 80px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            resize: none;
+        }
+
+        .reply-form-container .reply-button {
+            padding: 10px 10px;
+            height: 100px;
+            
+            background-color: #FF8787;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .reply-form-container .reply-button:hover {
+            background-color: #FF6666;
+        }
+
+        /* 댓글 컨테이너 스타일 */
+.comment-container {
+    border: 1px solid #ddd; /* 회색 테두리 */
+    border-radius: 5px; /* 모서리 둥글게 처리 */
+    padding: 15px; /* 내부 여백 */
+    margin-bottom: 15px; /* 아래 여백 */
+}
+
+/* 댓글 제목 스타일 */
+.comment-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* 각 댓글 스타일 */
+.comment {
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /* 연한 회색 테두리를 이용해 댓글 사이 구분 */
+}
+
+/* 댓글 헤더 스타일 */
+.comment-head {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    
+}
+.rateUp-comment img{
+    width: 15px;
+    height: 15px;
+}
+.rateDown-comment img{
+    width: 15px;
+    height: 15px;
+}
+
+.comment-time{
+    font-size: small;
+}
+
+.comment-writer{
+    font-weight: bold;
+}
+
+/* 댓글 텍스트 스타일 */
+.comment-text {
+    color: #333;
+    line-height: 1.5;
+}
+
+        .vote-area{
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+        }
+        .vote-area button{
+            margin: 6px;
+            width: 70px;
+            height: 70px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 네비게이션 바 -->
+<div th:replace="nav_user"></div>
+
+<!-- 게시글 내용 -->
+<div class="content">
+    <div class="article" style="margin-bottom: 30px;">
+        <h1>게시글 제목</h1>
+        <hr>
+        <div class="post-info">
+            <span>작성자: 글쓴이</span>
+            <span>작성일: 2024-04-08</span>
+            <span><span>조회수: 100</span> <a href="#">삭제</a></span>
+        </div>
+        <hr>
+        <p>
+            게시글 내용을 여기에 작성합니다. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
+        <div class="vote-area">
+            <button class="item " id="rateUp">
+                추천! <small id="ratingUp">0</small><br>   
+            </button>
+            <button class="item " id="rateDown">
+                비추천 <small id="ratingUp">0</small><br>   
+            </button>
+        </div>
+    </div>
+    <hr>
+
+    <!--댓글-->
+    <div class="comment-container">
+        <div class="comment-title">
+            댓글
+        </div>
+        <hr>
+        <div class="comment">
+            <div class="comment-head">
+                <span class="comment-writer">username1</span>
+                <div>
+                    <button class="rateUp-comment"><img src="rateUp.png" alt="">0</button>
+                    <button class="rateUp-comment"><img src="rateUp.png" alt="">0</button>
+                </div>
+                <div><span class="comment-time">2024-04-12 18:09:42</span></div>
+            </div>
+            <hr>
+            <span class="comment-text">Lorem, ipsum dolor sit amet consectetur</span>
+        </div>
+        <div class="comment">
+            <div class="comment-head">
+                <span class="comment-writer">username2</span>
+                <div>
+                    <button class="rateUp-comment"><img src="rateUp.png" alt="">0</button>
+                    <button class="rateUp-comment"><img src="rateUp.png" alt="">0</button>
+                </div>
+                <div><a href="/comment/delete" style="font-size: small; margin-right: 5px;">삭제</a><span class="comment-time">2024-04-12 18:09:42</span></div>
+            </div>
+            <hr>
+            <span class="comment-text">Lorem, ipsum dolor sit amet consectetur</span>
+        </div>
+    </div>
+
+    <hr>
+    <!--댓글작성-->
+    <div class="reply-form-container">
+        <!--닉네임-->
+        <div>
+            <span class="replyer-title" style="float: left;">댓글 작성</span>
+            <span class="replyer-username">username</span>
+        </div>
+        <br>
+        <!--댓글 입력칸-->
+        <form class="reply-form" action="/board/reply" method="post">
+            <textarea class="reply-text" name="content" type="text" style="float: left; width: max-content;"></textarea>
+            <button class="reply-button" >작성</button>
+        </form>
+    </div>
+
+    <hr>
+
+    <!-- 게시글 목록 -->
+    <table style="margin-bottom: 30px;">
+        <thead>
+            <tr>
+                <th>글제목</th>
+                <th>작성자</th>
+                <th>작성일시</th>
+                <th>조회수</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="post">
+                <td><a href="post1.html">첫 번째 게시물 제목</a></td>
+                <td>작성자1</td>
+                <td>2024-04-08</td>
+                <td>100</td>
+            </tr>
+            <tr class="post">
+                <td><a href="post2.html">두 번째 게시물 제목</a></td>
+                <td>작성자2</td>
+                <td>2024-04-09</td>
+                <td>80</td>
+            </tr>
+            <tr class="post">
+                <td><a href="post3.html">세 번째 게시물 제목</a></td>
+                <td>작성자3</td>
+                <td>2024-04-10</td>
+                <td>120</td>
+            </tr>
+            <tr class="post">
+                <td><a href="post3.html">네 번째 게시물 제목</a></td>
+                <td>작성자3</td>
+                <td>2024-04-10</td>
+                <td>120</td>
+            </tr>
+            <tr class="post">
+                <td><a href="post3.html">다섯 번째 게시물 제목</a></td>
+                <td>작성자3</td>
+                <td>2024-04-10</td>
+                <td>120</td>
+            </tr>
+            <tr class="post">
+                <td><a href="post3.html">여섯 번째 게시물 제목</a></td>
+                <td>작성자3</td>
+                <td>2024-04-10</td>
+                <td>120</td>
+            </tr>
+            <tr class="post">
+                <td><a href="post3.html">일곱 번째 게시물 제목</a></td>
+                <td>작성자3</td>
+                <td>2024-04-10</td>
+                <td>120</td>
+            </tr>
+            <tr class="post">
+                <td><a href="post3.html">여덟 번째 게시물 제목</a></td>
+                <td>작성자3</td>
+                <td>2024-04-10</td>
+                <td>120</td>
+            </tr>
+            <tr class="post">
+                <td><a href="post3.html">아홉 번째 게시물 제목</a></td>
+                <td>작성자3</td>
+                <td>2024-04-10</td>
+                <td>120</td>
+            </tr>
+            <tr class="post">
+                <td><a href="post3.html">열 번째 게시물 제목</a></td>
+                <td>작성자3</td>
+                <td>2024-04-10</td>
+                <td>120</td>
+            </tr>
+            <!-- 추가적인 게시물은 필요에 따라 반복해서 추가할 수 있습니다 -->
+        </tbody>
+    </table>
+
+
+    <!-- 페이지 네비게이션 -->
+    <div class="pagination">
+        <a href="#" class="active">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#">▶</a>
+        <a href="#">▶▶</a>
+    </div>
+</div>
+<hr>
+
+</body>
+</html>

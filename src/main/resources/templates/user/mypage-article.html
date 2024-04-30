@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+    <style>
+        nav.top-ui {
+            background-color: #FF8787; /* 배경색 */
+            overflow: hidden;
+        }
+
+        nav.top-ui a {
+            float: left; /* 왼쪽 정렬 */
+            display: block;
+            color: white; /* 글자색 */
+            text-align: center;
+            padding: 14px 20px; /* 위아래 왼오 여백 */
+            text-decoration: none;
+        }
+
+        nav.top-ui a:hover {
+            background-color: #ddd; /* 호버시 배경색 */
+            color: black; /* 호버시 글자색 */
+        }
+
+        nav.top-ui a.home {
+            font-weight: bold;
+        }
+
+        nav.top-ui a.login {
+            float: right; /* 오른쪽 정렬 */
+            display: block;
+            color: white; /* 글자색 */
+            padding: 14px 20px;
+            text-align: right;
+        }
+
+        /* 페이지 내 컨텐츠 스타일 */
+        .content {
+            padding: 20px;
+            margin-bottom: 100px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        h2 {
+            color: #666;
+        }
+
+        .content {
+            text-align: center;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .user-info {
+            margin-top: 50px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #FF8787;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #FF6666;
+        }
+
+        nav a.login{
+            color:bisque;
+        }
+
+        /* 새로운 스타일 추가 */
+        .menu {
+            float: left;
+            margin-right: 20px;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 15%;
+            border-right: #333;
+        }
+        .menu a {
+            border-bottom: 1px solid #ddd;
+            
+            color: #333;
+            text-decoration: none;
+            display: block;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease; /* 배경색 전환 애니메이션 */
+        }
+        .menu a:hover {
+            color: #FF8787;
+            border-right: #FF6666;
+        }
+
+                /* 게시글 목록 스타일 */
+                table {
+            width: 80%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #FF8787;
+            color: white;
+            font-weight: normal;
+        }
+
+        input[type="checkbox"]{
+            width: 20px;
+            height: 20px;
+            display: block;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div th:replace="user/nav_user.html"></div>
+
+<div class="menu">
+    <a href="#">회원 정보</a>
+    <a href="#">작성 글</a>
+    <a href="#">작성 댓글</a>
+    <a href="#">내 스타일</a>
+</div>
+<div class="content">
+
+        <!-- 게시글 목록 -->
+        <table style="margin-bottom: 30px;">
+            <thead>
+                <tr>
+                    <th>
+                        <input type="checkbox">
+                    </th>
+                    <th>글제목</th>
+                    
+                    <th>작성일시</th>
+                    <th>조회수</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="post">
+                    <td><input type="checkbox"></td>
+                    <td><a href="post1.html">첫 번째 게시물 제목</a></td>
+                    
+                    <td>2024-04-08</td>
+                    <td>100</td>
+                </tr>
+                <tr class="post">
+                    <td><input type="checkbox"></td>
+                    <td><a href="post2.html">두 번째 게시물 제목</a></td>
+                    
+                    <td>2024-04-09</td>
+                    <td>80</td>
+                </tr>
+                <tr class="post">
+                    <td><input type="checkbox"></td>
+                    <td><a href="post3.html">세 번째 게시물 제목</a></td>
+                    
+                    <td>2024-04-10</td>
+                    <td>120</td>
+                </tr>
+                <tr class="post">
+                    <td><input type="checkbox"></td>
+                    <td><a href="post3.html">네 번째 게시물 제목</a></td>
+                    
+                    <td>2024-04-10</td>
+                    <td>120</td>
+                </tr>
+                <tr class="post">
+                    <td><input type="checkbox"></td>
+                    <td><a href="post3.html">다섯 번째 게시물 제목</a></td>
+                    
+                    <td>2024-04-10</td>
+                    <td>120</td>
+                </tr>
+                <tr class="post">
+                    <td><input type="checkbox"></td>
+                    <td><a href="post3.html">여섯 번째 게시물 제목</a></td>
+                    
+                    <td>2024-04-10</td>
+                    <td>120</td>
+                </tr>
+                <tr class="post">
+                    <td><input type="checkbox"></td>
+                    <td><a href="post3.html">일곱 번째 게시물 제목</a></td>
+                    
+                    <td>2024-04-10</td>
+                    <td>120</td>
+                </tr>
+                <tr class="post">
+                    <td><input type="checkbox"></td>
+                    <td><a href="post3.html">여덟 번째 게시물 제목</a></td>
+                    
+                    <td>2024-04-10</td>
+                    <td>120</td>
+                </tr>
+                <tr class="post">
+                    <td><input type="checkbox"></td>
+                    <td><a href="post3.html">아홉 번째 게시물 제목</a></td>
+                    
+                    <td>2024-04-10</td>
+                    <td>120</td>
+                </tr>
+                <tr class="post">
+                    <td><input type="checkbox"></td>
+                    <td><a href="post3.html">열 번째 게시물 제목</a></td>
+                    
+                    <td>2024-04-10</td>
+                    <td>120</td>
+                </tr>
+                <!-- 추가적인 게시물은 필요에 따라 반복해서 추가할 수 있습니다 -->
+            </tbody>
+        </table>
+        <button>
+            삭제
+        </button>
+</div>
+
+
+<script>
+    function editProfile() {
+        // 입력 필드 수정 가능하도록 변경
+        document.getElementById('email').readOnly = false;
+        document.getElementById('password').readOnly = false;
+    }
+
+    function deleteAccount() {
+        // 회원 탈퇴 로직 구현
+        if (confirm('정말로 회원을 탈퇴하시겠습니까?')) {
+            // 탈퇴 처리
+            alert('회원 탈퇴가 완료되었습니다.');
+            window.location.href = 'logout.php'; // 로그아웃 페이지로 이동
+        }
+    }
+
+    function logout() {
+        // 로그아웃 처리
+        window.location.href = 'logout.php'; // 로그아웃 페이지로 이동
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>내 웹 페이지</title>
+    <style>
+        /* 네비게이션 바 스타일 */
+        nav {
+            background-color: #FF8787; /* 배경색 */
+            overflow: hidden;
+        }
+
+        nav a {
+            float: left; /* 왼쪽 정렬 */
+            display: block;
+            color: white; /* 글자색 */
+            text-align: center;
+            padding: 14px 20px; /* 위아래 왼오 여백 */
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #ddd; /* 호버시 배경색 */
+            color: black; /* 호버시 글자색 */
+        }
+
+        nav a.home {
+            font-weight: bold;
+            
+        }
+
+        nav a.simulate{
+            color: bisque;
+        }
+
+        nav a.login {
+            float: right; /* 오른쪽 정렬 */
+            display: block;
+            color: white; /* 글자색 */
+            padding: 14px 20px;
+            text-align: right;
+        }
+
+        /* 페이지 내 컨텐츠 스타일 */
+        .content {
+            padding: 20px;
+            margin-bottom: 100px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        h2 {
+            color: #666;
+        }
+
+        .upload-div {
+            background-color: #e94343;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-block;
+            align-items: center; /* 아이콘과 텍스트 수직 정렬 */
+            justify-content: center; /* 아이콘과 텍스트 수평 정렬 */
+        }
+
+        button{
+            background-color: #e94343;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .start-btn:hover {
+            background-color: #FF6666;
+        }
+
+        .start-btn img {
+            width: 20px; /* 아이콘 크기 지정 */
+            height: 20px;
+            margin-right: 10px; /* 아이콘과 텍스트 사이 간격 */
+        }
+
+        .content {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 네비게이션 바 -->
+<div th:replace="user/nav_user.html"></div>
+
+<!-- 웹 페이지 내용 -->
+<div class="content">
+    <!-- 이미지 표시 영역 -->
+    <div id="imagePreview"></div>
+
+    <br>
+    <div class="upload-div">
+        <form id="uploadForm" action="/recommend" method="post" enctype="multipart/form-data">
+            <!-- 이미지 선택 input -->
+            <input type="file" id="imageInput" name="image" accept="image/*">
+            <div class="start-btn" style="padding-left: 10px; display: inline-block; vertical-align: middle;">
+                <img src="photo.png" alt="업로드 아이콘" style="display: inline-block; vertical-align: middle;">
+                <p style="display: inline-block; vertical-align: middle;">사진 업로드</p>
+            </div>
+            <!-- 시작하기 버튼 -->
+            <button type="submit">시작하기</button>
+        </form>
+    </div>
+
+    <div style="margin-top: 20px; border-top: 1px solid #ccc; padding-top: 20px;">
+        <h2>당신에게 알맞는 헤어는...</h2>
+        <p>투블럭, 리젠트, 댄디입니다</p>
+
+        <div style="margin-top: 20px; display: flex; justify-content: space-between;">
+            <div style="text-align: center;">
+                <img src="example.png" alt="이미지1" width="255px">
+                <p>투블럭</p>
+            </div>
+            <div style="text-align: center;">
+                <img src="example.png" alt="이미지2" width="255px">
+                <p>리젠트</p>
+            </div>
+            <div style="text-align: center;">
+                <img src="example.png" alt="이미지3" width="255px">
+                <p>댄디</p>
+            </div>
+        </div>
+        <h2>헤어스타일을 저장하시겠습니까?</h2>
+        <span>
+            <button>저장</button>
+            <button>저장 안 함</button>
+        </span>
+    </div>
+</div>
+
+<!-- JavaScript -->
+<script>
+    // 이미지 파일 선택 후 미리보기 표시 및 서버로 전송
+    document.getElementById('uploadForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // 기본 동작 중단
+
+        // FormData 객체 생성
+        var formData = new FormData(this);
+
+        // 이미지 파일 선택 input
+        var imageInput = document.getElementById('imageInput');
+        var files = imageInput.files;
+
+        // 최대 3개 이미지 파일만 선택하도록 제한
+        if (files.length > 3) {
+            alert('최대 3개의 이미지 파일을 선택할 수 있습니다.');
+            return;
+        }
+
+        // 모든 이미지 파일을 FormData에 추가
+        for (var i = 0; i < files.length; i++) {
+            formData.append('image[]', files[i]);
+        }
+
+        // XMLHttpRequest 객체 생성
+        var xhr = new XMLHttpRequest();
+
+        // POST 요청 설정
+        xhr.open('POST', '/recommend', true);
+
+        // 요청 완료 시 동작 정의
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                alert('이미지가 성공적으로 업로드되었습니다.');
+            } else {
+                alert('이미지 업로드에 실패하였습니다.');
+            }
+        };
+
+        // FormData 객체를 서버로 전송
+        xhr.send(formData);
+    });
+</script>
+
+<hr>
+
+
+
+</body>
+</html>

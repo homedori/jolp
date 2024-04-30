@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        nav.top-ui {
+            background-color: #FF8787; /* 배경색 */
+            overflow: hidden;
+        }
+
+        nav.top-ui a {
+            float: left; /* 왼쪽 정렬 */
+            display: block;
+            color: white; /* 글자색 */
+            text-align: center;
+            padding: 14px 20px; /* 위아래 왼오 여백 */
+            text-decoration: none;
+        }
+
+        nav.top-ui a:hover {
+            background-color: #ddd; /* 호버시 배경색 */
+            color: black; /* 호버시 글자색 */
+        }
+
+        nav.top-ui a.home {
+            font-weight: bold;
+        }
+
+        nav.top-ui a.login {
+            float: right; /* 오른쪽 정렬 */
+            display: block;
+            color: white; /* 글자색 */
+            padding: 14px 20px;
+            text-align: right;
+        }
+        .menu {
+            float: left;
+            width: 20%;
+            height: 100vh;
+            background-color: #f9f9f9;
+            border-right: 1px solid #ddd;
+            padding-top: 20px;
+        }
+        .menu a {
+            color: #333;
+            text-decoration: none;
+            display: block;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease;
+        }
+        .menu a:hover {
+            background-color: #ddd;
+            color: #FF8787;
+        }
+        .content {
+            margin-left: 20%;
+            padding: 20px;
+        }
+        .box-container {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            grid-auto-flow: row;
+        }
+        .hair-container {
+            width: fit-content;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .hair-container span {
+            font-weight: bold;
+        }
+        .hair-container img {
+            display: block;
+            margin: 10px auto;
+            width: 300px;
+            max-width: 100%;
+            height: 300px;
+        }
+        h2 {
+            text-align: left;
+        }
+
+        .hair-container button{
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #FF8787;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+
+<div th:replace="user/nav_user.html"></div>
+
+<div class="menu">
+    <a href="#">회원 정보</a>
+    <a href="#">작성 글</a>
+    <a href="#">작성 댓글</a>
+    <a href="#">내 스타일</a>
+</div>
+
+<div class="content">
+    <h2>내 헤어스타일</h2>
+    <hr>
+    <div class="box-container">
+        <div class="hair-container">
+            <span>헤어 스타일 제목 1</span>
+            <img src="example.png" alt="헤어 스타일 이미지 1">
+            <p>2024-04-11 19:58:55</p>
+            <button>삭제</button>
+        </div>
+        <div class="hair-container">
+            <span>헤어 스타일 제목 1</span>
+            <img src="example.png" alt="헤어 스타일 이미지 1">
+            <p>2024-04-11 19:58:55</p>
+            <button>삭제</button>
+        </div>
+        <div class="hair-container">
+            <span>헤어 스타일 제목 1</span>
+            <img src="example.png" alt="헤어 스타일 이미지 1">
+            <p>2024-04-11 19:58:55</p>
+            <button>삭제</button>
+        </div>
+        <div class="hair-container">
+            <span>헤어 스타일 제목 1</span>
+            <img src="example.png" alt="헤어 스타일 이미지 1">
+            <p>2024-04-11 19:58:55</p>
+            <button>삭제</button>
+        </div>
+        <div class="hair-container">
+            <span>헤어 스타일 제목 1</span>
+            <img src="example.png" alt="헤어 스타일 이미지 1">
+            <p>2024-04-11 19:58:55</p>
+            <button>삭제</button>
+        </div>
+        <div class="hair-container">
+            <span>헤어 스타일 제목 1</span>
+            <img src="example.png" alt="헤어 스타일 이미지 1">
+            <p>2024-04-11 19:58:55</p>
+            <button>삭제</button>
+        </div>
+        <div class="hair-container">
+            <span>헤어 스타일 제목 1</span>
+            <img src="example.png" alt="헤어 스타일 이미지 1">
+            <p>2024-04-11 19:58:55</p>
+            <button>삭제</button>
+        </div>
+
+        
+        
+        <!-- hair-container를 추가하여 필요한 만큼 복제할 수 있습니다 -->
+    </div>
+</div>
+
+</body>
+</html>
